@@ -4,19 +4,21 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Report Detail Transaction Order</h5>
+                <h5 class="card-title">Report Transaction Order</h5>
                 <div class="table-responsive">
                     <div class="mb-3">
-                        <form action="" method="post">
+                        <form action="{{ route('report') }}" method="post" class="needs-validation" novalidate>
                             @csrf
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label for="" class="form-label">Date Start</label>
                                     <input type="date" name="date_start" class="form-control" value="" required>
+                                    <div class="invalid-feedback">Please select start date!</div>
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="" class="form-label">Date End</label>
                                     <input type="date" name="date_end" class="form-control" value="" required>
+                                    <div class="invalid-feedback">Please select end date!</div>
                                 </div>
                                 <div class="col-sm-3 mt-4">
                                     <button type="submit" name="filter" class="btn btn-primary">Filter</button>
@@ -25,6 +27,9 @@
                         </form>
                     </div>
                     <div class="card-datatable pt-0">
+                        <div class="mb-3" align="right">
+                            <a href="{{ route('print_laporan') }}" class="btn btn-secondary">Print</a>
+                        </div>
                         <table class="table table-bordered datatable">
                             <thead>
                                 <tr>

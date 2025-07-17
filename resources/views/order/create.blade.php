@@ -15,6 +15,7 @@
                         <div class="mb-3">
                             <label for="code" class="form-label">Estimation</label>
                             <input type="date" name="order_end_date" class="form-control" required>
+                            <div class="invalid-feedback">Please choose estimation date!</div>
                         </div>
                         <div class="mb-3">
                             <label for="id_service" class="form-label">Service</label>
@@ -35,6 +36,7 @@
                                 <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
                                 @endforeach
                             </select>
+                            <div class="invalid-feedback">Please select customer!</div>
                         </div>
                         <div class="mb-3">
                             <label for="note" class="form-label">Note</label>
@@ -91,7 +93,8 @@
             <td>${no}</td>
             <td><input type="hidden" class="id_services" name="id_service[]" value="${optionService.value}">${optionService.textContent}</td>
             <td>
-                <input type="number" class="form-control qtys" step="any" min="1" name="qty[]" value="1">
+                <input type="number" class="form-control qtys" step="any" min="1" name="qty[]" value="1" required>
+                <div class="invalid-feedback">Invalid quantity!</div>
                 <input type="hidden" class="notess" name="notes[]" value="${selectNotes.value}">
             </td>
             <td><input type="hidden" class="prices" value="${priceService}">Rp ${priceService.toLocaleString('id-ID')}</td>

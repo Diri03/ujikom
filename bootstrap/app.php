@@ -25,6 +25,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'pimpinan' => \App\Http\Middleware\Pimpinan::class,
         ]);
     })
+    ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->alias([
+            'adopt' => \App\Http\Middleware\AdOpt::class,
+        ]);
+    })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();

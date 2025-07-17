@@ -46,10 +46,10 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Order ID</th>
-                                                <th>Customer Name</th>
+                                                <th>Code</th>
+                                                <th>Customer</th>
                                                 <th>Status</th>
-                                                <th>Total Amount</th>
+                                                <th>Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -58,7 +58,7 @@
                                                     <td>{{ $index + 1 }}</td>
                                                     <td>{{ $order->order_code }}</td>
                                                     <td>{{ $order->customer->customer_name }}</td>
-                                                    <td>{{ $order->status_text }}</td>
+                                                    <td class="{{ $order->order_status == 0 ? 'text-info' : 'text-success' }}">{{ $order->status_text }}</td>
                                                     <td>Rp {{ number_format($order->total) }}</td>
                                                 </tr>
                                             @endforeach

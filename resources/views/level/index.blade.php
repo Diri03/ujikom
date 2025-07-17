@@ -23,11 +23,11 @@
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $level->level_name }}</td>
                                 <td>
-                                    <a href="{{ route('level.edit', $level->id) }}" id="delete-form-{{ $level->id }}" class="btn btn-success btn-sm">Edit</a>
-                                    <form method="post" action="{{ route('level.destroy', $level->id) }}" class="d-inline">
+                                    <a href="{{ route('level.edit', $level->id) }}" class="btn btn-success btn-sm">Edit</a>
+                                    <form action="{{ route('level.destroy', $level->id) }}" method="post" id="delete-form-{{ $level->id }}" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="confirmAndDelete({{ $level->id }})">Delete</button>
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmAndDelete({{ $level->id }})">Delete</button>
                                     </form>
                                 </td>
                             </tr>

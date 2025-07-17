@@ -57,7 +57,7 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">Detail Order</h3>
-                <form action="{{ route('order.update', $order->id) }}" method="post" class="row g-3 needs-validation" novalidadte>
+                <form action="{{ route('order.update', $order->id) }}" method="post" class="row g-3 needs-validation" novalidate>
                     @csrf
                     @method('PUT')
                     <div class="table-responsive col-sm-12">
@@ -94,6 +94,7 @@
                                         <div class="input-group">
                                             <span class="input-group-text" id="inputGroupPrepend">Rp</span>
                                             <input type="number" class="form-control pay" min="{{ $order->total }}" name="order_pay" required>
+                                            <div class="invalid-feedback">Total pay must be greater than total!</div>
                                         </div>
                                     </td>
                                 </tr>
