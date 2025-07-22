@@ -50,6 +50,7 @@ class ReportController extends Controller
             return view('report.print', compact('title', 'orders'));
         }
         $orders = TransOrders::withTrashed()->with(['customer', 'details'])->get();
+        session()->forget(['START_DATE', 'END_DATE']);
         return view('report.print', compact('title', 'orders'));
     }
 }
