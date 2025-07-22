@@ -16,7 +16,7 @@ class DashboardController extends Controller
     public function index()
     {
         $title = "Dashboard";
-        $orders = TransOrders::orderBy('total', 'desc')->withTrashed()->with(['customer', 'details.service'])->take(3)->get();
+        $orders = TransOrders::orderBy('total', 'desc')->withTrashed()->with(['customer', 'details.service'])->take(10)->get();
         $customers = Customers::all();
         $services = TypeOfServices::all();
         $users = User::all();

@@ -58,8 +58,8 @@
 <body>
     <div class="struk">
         <div class="struk-header">
-            <h3>Laundry Diri</h3>
-            <h2>Cepat dan Bersih</h2>
+            <h2>Laundry Diri</h3>
+            <h3>Cepat dan Bersih</h2>
 
             <div class="info text-center">
                 Jl. Karet Baru Benhil Jakarta Pusat
@@ -78,7 +78,7 @@
                 <span>{{ auth()->user()->name }}</span>
             </div>
             <div class="row">
-                <span>Order Id</span>
+                <span>Code</span>
                 <span>{{ $details->order_code }}</span>
             </div>
         </div>
@@ -89,7 +89,7 @@
                 <strong>{{ $detail->service->service_name }}</strong>
                 <div class="item-qty">
                     <span>{{ $detail->qty/1000 }} kg x Rp {{ number_format($detail->service->price) }}</span>
-                    <span>{{ $detail->subtotal }}</span>
+                    <span>Rp {{ number_format($detail->subtotal) }}</span>
                 </div>
             </div>
             @endforeach

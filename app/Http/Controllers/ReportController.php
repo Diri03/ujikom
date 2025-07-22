@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-
-    public function report($date_start = null, $date_end = null){
+    public function report()
+    {
         $title = 'Report';
         $orders = TransOrders::withTrashed()->with(['customer', 'details'])->get();
         return view('report.index', compact('orders', 'title'));
@@ -27,6 +27,10 @@ class ReportController extends Controller
                 ->whereDate('order_date', '<=', $endDate)
                 ->get();
 
+            session([
+                "START_DATE" => $startDate,
+                "END_DATE" => $endDate
+            ]);
             return view('report.index', compact('title', 'orders'));
         }
 
@@ -34,8 +38,18 @@ class ReportController extends Controller
         return view('report.index', compact('orders', 'title'));
     }
 
-    public function printLaporan(){
+    public function printLaporan()
+    {
+        $title = 'Print Report';
+        if (session('START_DATE')) {
+            $orders = TransOrders::withTrashed()->with(['customer', 'details'])
+                ->whereDate('order_date', '>=', session('START_DATE'))
+                ->whereDate('order_date', '<=', session('END_DATE'))
+                ->get();
+
+            return view('report.print', compact('title', 'orders'));
+        }
         $orders = TransOrders::withTrashed()->with(['customer', 'details'])->get();
-        return view('report.print', compact('orders'));
+        return view('report.print', compact('title', 'orders'));
     }
 }

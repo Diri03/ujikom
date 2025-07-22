@@ -7,7 +7,7 @@
                 <h5 class="card-title">Report Transaction Order</h5>
                 <div class="table-responsive">
                     <div class="mb-3">
-                        <form action="{{ route('report') }}" method="post" class="needs-validation" novalidate>
+                        <form action="{{ route('reportFilter') }}" method="post" class="needs-validation" novalidate>
                             @csrf
                             <div class="row">
                                 <div class="col-sm-3">
@@ -48,7 +48,7 @@
                                     <td>{{ $order->order_code ?? ''}}</td>
                                     <td>{{ $order->customer->customer_name  ?? ''}}</td>
                                     <td>{{ date('d F Y', strtotime($order->order_date)) ?? ''}}</td>
-                                    <td>{{ $order->status_text ?? '' }}</td>
+                                    <td class="{{ $order->order_status == 0 ? 'text-info' : 'text-success' }}">{{ $order->status_text ?? '' }}</td>
                                     <td>Rp {{ number_format($order->total) ?? '' }}</td>
                                 </tr>
                                 @endforeach

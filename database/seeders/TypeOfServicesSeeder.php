@@ -13,22 +13,31 @@ class TypeOfServicesSeeder extends Seeder
      */
     public function run(): void
     {
-        TypeOfServices::insert([
+        $services = [
             [
                 'service_name' => 'Cuci dan Gosok',
-                'price' => 5000,
-                'description' => 'Jasa Cuci dan Gosok hanya Rp 5.000'
+                'price' => 6000,
+                'description' => 'Jasa Cuci dan Gosok hanya Rp 6.000'
             ],
             [
                 'service_name' => 'Cuci',
-                'price' => 4500,
-                'description' => 'Jasa Cuci hanya Rp 4.500'
+                'price' => 4000,
+                'description' => 'Jasa Cuci hanya Rp 4.000'
             ],
             [
                 'service_name' => 'Gosok',
-                'price' => 5000,
-                'description' => 'Jasa Gosok hanya Rp 5.000'
+                'price' => 4000,
+                'description' => 'Jasa Gosok hanya Rp 4.000'
+            ],
+            [
+                'service_name' => 'Cuci dan Gosok Express',
+                'price' => 10000,
+                'description' => 'Jasa Gosok hanya Rp 10.000'
             ]
-        ]);
+        ];
+
+        foreach ($services as $service) {
+            TypeOfServices::create($service);
+        }
     }
 }

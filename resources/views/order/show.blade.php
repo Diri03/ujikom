@@ -46,7 +46,7 @@
                         <tr>
                             <th>Status</th>
                             <td>:</td>
-                            <td>{{ $order->status_text }}</td>
+                            <td class="{{ $order->order_status == 0 ? 'text-info' : 'text-success' }}">{{ $order->status_text }}</td>
                         </tr>
                     </table>
                 </div>
@@ -75,7 +75,27 @@
                                 @foreach ($order->details as $index => $detail)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $detail->service->service_name }}</td>
+                                    <td>
+                                        @if (empty($detail->notes))
+                                        {{ $detail->service->service_name }}
+                                        @else
+                                        {{ $detail->service->service_name }} <i class="bi bi-bookmark-fill" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#note{{ $index + 1 }}"></i>
+                                        @endif
+                                    </td>
+                                    <!-- Modal Note -->
+                                    <div class="modal fade" id="note{{ $index + 1 }}" tabindex="-1" aria-labelledby="note{{ $index + 1 }}Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="note{{ $index + 1 }}Label">Note</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <textarea readonly class="form-control">{{ $detail->notes }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <td>Rp {{ number_format($detail->service->price) }}</td>
                                     <td>{{ $detail->qty/1000 }} kg</td>
                                     <td>Rp {{ number_format($detail->subtotal) }}</td>
@@ -112,16 +132,16 @@
                                     <td><input type="hidden" value="{{ $order->order_change }}">Rp {{ number_format($order->order_change) }}</td>
                                 </tr>
                                 @endif
-                                
+
                             </tfoot>
                         </table>
                     </div>
-                    @if ($order->order_status == 0)
                     <div class="col-sm-12">
+                        @if ($order->order_status == 0)
                         <button type="submit" class="btn btn-primary">Pay</button>
+                        @endif
                         <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
                     </div>
-                    @endif
                 </form>
             </div>
         </div>

@@ -27,7 +27,7 @@ class TransOrderController extends Controller
     public function create()
     {
         $today = Carbon::now()->format('dmY');
-        $countDay = TransOrders::whereDate('created_at', now())->count() + 1;
+        $countDay = TransOrders::withTrashed()->whereDate('created_at', now())->count() + 1;
         $runningNumber = str_pad($countDay, 3, '0', STR_PAD_LEFT);
         $code = 'TR-' . $today . '-' . $runningNumber;
         $title = "Transaction Order";
@@ -72,7 +72,7 @@ class TransOrderController extends Controller
             'id_customer' => $request->id_customer,
             'order_code' => $request->order_code,
             'order_date' => Carbon::now(),
-            'order_end_date' => Carbon::now()->addDays(2),
+            'order_end_date' => $request->order_end_date,
             'order_note' => $request->order_note,
             'total' => $request->total
         ]);
@@ -84,7 +84,7 @@ class TransOrderController extends Controller
                 TransOrderDetails::create([
                     'id_order' => $id_order,
                     'id_service' => $idService,
-                    'qty' => $request->qty[$index]*1000,
+                    'qty' => $request->qty[$index] * 1000,
                     'subtotal' => $request->subtotal[$index],
                     'notes' => $request->notes[$index]
                 ]);
@@ -92,7 +92,7 @@ class TransOrderController extends Controller
                 TransOrderDetails::create([
                     'id_order' => $id_order,
                     'id_service' => $idService,
-                    'qty' => $request->qty[$index]*1000,
+                    'qty' => $request->qty[$index] * 1000,
                     'subtotal' => $request->subtotal[$index],
 
                 ]);

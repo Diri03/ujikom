@@ -13,10 +13,14 @@ class LevelsSeeder extends Seeder
      */
     public function run(): void
     {
-        Levels::insert([
+        $levels = [
             ['level_name' => 'Administrator'],
             ['level_name' => 'Operator'],
             ['level_name' => 'Pimpinan']
-        ]);
+        ];
+
+        foreach ($levels as $level) {
+            Levels::create($level);
+        }
     }
 }

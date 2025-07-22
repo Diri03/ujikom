@@ -14,7 +14,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="code" class="form-label">Estimation</label>
-                            <input type="date" name="order_end_date" class="form-control" required>
+                            <input type="date" min="{{ date('Y-m-d') }}" name="order_end_date" class="form-control" required>
                             <div class="invalid-feedback">Please choose estimation date!</div>
                         </div>
                         <div class="mb-3">

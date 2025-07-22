@@ -12,6 +12,7 @@
                                 <h3 class="card-title" align="center">Data User</h3>
                                 <div class="table-responsive">
                                     <table class="table table-stripped">
+                                        <img src="{{ asset('assets/img/icon.jpg') }}" alt="profile" width="100%" class="img-fluid mb-3 rounded-circle">
                                         <tr>
                                             <th>Name</th>
                                             <td>:</td>
@@ -30,7 +31,7 @@
                                         <tr>
                                             <th>Login</th>
                                             <td>:</td>
-                                            <td>{{ auth()->user()->created_at->format('d F Y H:i:s') }}</td>
+                                            <td id="login"></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -45,7 +46,6 @@
                                     <table class="table table-stripped">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
                                                 <th>Code</th>
                                                 <th>Customer</th>
                                                 <th>Status</th>
@@ -55,7 +55,6 @@
                                         <tbody>
                                             @foreach ($orders as $index => $order)
                                                 <tr>
-                                                    <td>{{ $index + 1 }}</td>
                                                     <td>{{ $order->order_code }}</td>
                                                     <td>{{ $order->customer->customer_name }}</td>
                                                     <td class="{{ $order->order_status == 0 ? 'text-info' : 'text-success' }}">{{ $order->status_text }}</td>
@@ -97,4 +96,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        const login = document.querySelector('#login');
+        const now = new Date();
+        const monthNames = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        const day = now.getDate();
+        const month = monthNames[now.getMonth()];
+        const year = now.getFullYear();
+
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        const formattedTime = `${day} ${month} ${year} ${hours}:${minutes}:${seconds}`;
+        login.textContent = formattedTime;
+    });
+</script>
 @endsection
